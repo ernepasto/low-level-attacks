@@ -1,4 +1,4 @@
-# if x is even then y = 1 else y = 0 | Where: x = rdi and y = rax
+; if x is even then y = 1 else y = 0 | Where: x = rdi and y = rax
 .intel_syntax noprefix
 .global _start
 _start:

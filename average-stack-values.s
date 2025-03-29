@@ -1,4 +1,4 @@
-# Without using pop, calculate the average of 4 consecutive quad words stored on the stack. Push the average on the stack.
+; Without using pop, calculate the average of 4 consecutive quad words stored on the stack. Push the average on the stack.
 .intel_syntax noprefix
 .global _start
 _start:

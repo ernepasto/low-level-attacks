@@ -1,4 +1,4 @@
-#Low-level attacks
+# Low-level attacks
 I low-level attacks in C sfruttano vulnerabilità nella gestione della memoria per eseguire codice arbitrario o manipolare il flusso di esecuzione di un programma. Tra i più noti ci sono il buffer overflow e la shellcode injection.
 
 Un buffer overflow si verifica quando un programma scrive più dati di quanti ne siano stati allocati per un determinato buffer in memoria, sovrascrivendo dati adiacenti e potenzialmente modificando il comportamento del programma.

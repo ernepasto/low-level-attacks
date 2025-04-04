@@ -1,13 +1,6 @@
 #!/usr/bin/python3
 from pwn import *
 
-'''
--- OBIETTIVO DEL PROGRAMMA --
-
-
------------------------------
-'''
-
 # Impostazione dell'architettura di riferimento e del livello di log
 context.log_level = 'CRITICAL'
 

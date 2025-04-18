@@ -1,11 +1,14 @@
-
 #!/usr/bin/python3
 from pwn import *
 
 '''
 -- OBIETTIVO DEL PROGRAMMA --
-
-
+In questo esercizio bisogna inserire all'interno del buffer uno shellcode per eseguire
+il comando 'cat' della flag. Il programma salva una variabile nello stack che non permette
+di inserire semplicemente lo shellcode, perchè quest'ultimo viene sovrascritto e quindi non
+funziona. Per evitare questo problema si può inserire del padding tra il buffer e il return
+address, per poi inserire al posto del return address un indirizzo successivo nella memoria e inserire
+proprio a tale indirizzo lo shellcode. In questo modo si evita il problema descritto sopra.
 -----------------------------
 '''
 
